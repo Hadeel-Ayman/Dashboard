@@ -1,0 +1,24 @@
+header {
+    background-color: #ffe190;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px;
+}
+
+ul {
+    display: flex;
+}
+
+ul li {
+    padding: 0 10px;
+}
+
+.nav-links {
+    padding: 0 20px;
+}
+
+a {
+    color: black;
+}
