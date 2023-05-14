@@ -28,4 +28,13 @@ router.post('/add-products', (req, res) => {
         .then((data) => res.status(200).send(data))
         .catch((e) => res.status(400).send(e.message))
 })
+
+// get all products
+router.get('/products', async (req, res) => {
+    ProductModel.find({}).then((data) => {
+        res.status(200).send(data)
+    }).catch((e) => res.status(500).send(e))
+
+})
+
 module.exports = router

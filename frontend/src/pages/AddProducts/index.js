@@ -1,10 +1,11 @@
 import React, { useReducer } from 'react'
 import { Input } from '../../component'
 import { initialState1, reducer1 } from '../../reducer/ProductReducer'
+import { localhost } from '../../config/config'
+import './style.css'
 
 const AddProducts = () => {
     const [state, dispatch] = useReducer(reducer1, initialState1)
-
     const name = state.name
     const price = state.price
     const category = state.category
@@ -14,22 +15,23 @@ const AddProducts = () => {
     const handleClick = async (e) => {
         e.preventDefault()
 
-        let data = await fetch('http://localhost:5000/add-products', {
+        const userId = JSON.parse(localStorage.getItem('user'))._id
+        let data = await fetch(`${localhost}/add-products`, {
             method: 'post',
-            body: JSON.stringify({ name, price, category, company }),
+            body: JSON.stringify({ name, price, category, company, userId }),
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
-        const fetchdata = data.json()
-        console.log(fetchdata)
+        });
+
+        data = await data.json();
+        console.log(data)
     }
 
 
     return (
-        <div>
-            <form>
-
+        <div className='addProduct'>
+            <form onSubmit={handleClick}>
                 <Input
                     placeholder='Enter the name of product'
                     value={state.name}
@@ -46,8 +48,7 @@ const AddProducts = () => {
                     placeholder='Enter the company of product'
                     value={state.company}
                     onChange={(e) => dispatch({ type: 'company', value: e.target.value })} />
-
-                <button onClick={handleClick}>Add Products</button>
+                <button>Add Products</button>
             </form>
         </div>
     )

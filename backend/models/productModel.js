@@ -7,17 +7,17 @@ const ProductSchema = new mongoose.Schema({
         required: true
     },
     price: {
-        type: Number,
+        type: String,
         trim: true,
     },
     category: {
         type: String,
-        trim: true,
+        trim: true
     },
     userId: {
         type: String,
         trim: true,
-        unique: true
+        unique: true,
     },
     company: {
         type: String,

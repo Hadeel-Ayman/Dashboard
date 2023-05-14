@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer } from 'react'
 import { Input } from '../../component'
 import './style.css'
+import { localhost } from "../../config/config";
 import { initialState, reducer } from '../../reducer/userReducer'
 import { useNavigate } from 'react-router-dom'
 
@@ -12,8 +13,7 @@ const Signup = () => {
         if (getData) {
             navigation('/')
         }
-    }, [])
-
+    })
 
     const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -24,7 +24,7 @@ const Signup = () => {
     const handleForm = async (e) => {
         e.preventDefault()
 
-        let fetchData = await fetch('http://localhost:5000/regestier', {
+        let fetchData = await fetch(`${localhost}/regestier`, {
             method: 'post',
             body: JSON.stringify({ username, password, email }),
             headers: {
@@ -37,6 +37,7 @@ const Signup = () => {
 
         localStorage.setItem('user', JSON.stringify(fetchData))
         if (fetchData) {
+            // console.log('object')
             navigation('/')
         }
     }
